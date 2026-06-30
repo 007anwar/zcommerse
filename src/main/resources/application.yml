@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: ZCOM-SERVICE
+  management:
+    tracing:
+      enabled: true
+      sampling:
+        probability: 1.0   # trace every request (keep lower in prod)
+  cache:
+    type: redis
+  redis:
+    host: localhost
+    port: 6379
+  datasource:
+    url: jdbc:mysql://localhost:3306/product_db
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQLDialect
+server:
+  port: 8080
+logging:
+  pattern:
+    level: "%5p [TRACE_ID:%X{traceId:-}] [SPAN_ID:%X{spanId:-}]"
+  level:
+    javax.net.ssl: DEBUG
+    sun.security.ssl: DEBUG
+
+
